@@ -36,6 +36,13 @@
         "path": "./syntaxes/iloko.tmLanguage.json"
       }
     ],
+    "iconThemes": [
+      {
+        "id": "iloko-icons",
+        "label": "Iloko Icons",
+        "path": "./file-icons/iloko-icon-theme.json"
+      }
+    ],
     "commands": [
       {
         "command": "iloko.runFile",

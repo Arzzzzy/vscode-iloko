@@ -1,0 +1,13 @@
+{
+  "iconDefinitions": {
+    "_iloko": {
+      "iconPath": "../ilokoicon.png"
+    }
+  },
+  "fileExtensions": {
+    "iloko": "_iloko"
+  },
+  "fileNames": {},
+  "folderNames": {},
+  "folderExpanded": {}
+}
