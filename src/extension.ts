@@ -7,16 +7,25 @@ import * as fs from 'fs';
 export function activate(context: vscode.ExtensionContext) {
     console.log('Iloko extension activated.');
 
-    // 🌟 Auto-apply Iloko icon theme if not already active
-    const config = vscode.workspace.getConfiguration('workbench');
-    const currentIconTheme = config.get('iconTheme');
+    // 🔹 File icon decoration for .iloko files
+    const iconPath = vscode.Uri.file(path.join(context.extensionPath, 'ilokoicon.png'));
 
-    if (currentIconTheme !== 'iloko-icons') {
-        config.update('iconTheme', 'iloko-icons', vscode.ConfigurationTarget.Global)
-            .then(() => {
-                vscode.window.showInformationMessage('✅ Iloko Icons theme activated automatically!');
-            });
-    }
+    const ilokoDecorator = vscode.window.registerFileDecorationProvider({
+        provideFileDecoration(uri: vscode.Uri): vscode.FileDecoration | undefined {
+            if (uri.fsPath.endsWith('.iloko')) {
+                return {
+                    tooltip: 'Iloko source file',
+                    propagate: false,
+                    badge: undefined,
+                    color: undefined,
+                    iconPath: iconPath // ✅ Correct property usage
+                } as vscode.FileDecoration;
+            }
+            return undefined;
+        }
+    });
+
+    context.subscriptions.push(ilokoDecorator);
 
     // 🟦 Register "Run Iloko File" command
     const runIloko = vscode.commands.registerCommand('iloko.runFile', async () => {
@@ -35,20 +44,17 @@ export function activate(context: vscode.ExtensionContext) {
         await doc.save();
         const filePath = doc.fileName;
 
-        let ilokoPath = "iloko"; // default command
+        let ilokoPath = "iloko";
         const homeDir = os.homedir();
 
-        // 1️⃣ Check if iloko exists in PATH
         try {
             const found = execSync("which iloko").toString().trim();
             if (found) ilokoPath = found;
         } catch {
-            // 2️⃣ Try venv inside home folder
             const venvPath = path.join(homeDir, "venv", "bin", "iloko");
             if (fs.existsSync(venvPath)) {
                 ilokoPath = venvPath;
             } else {
-                // 3️⃣ Try pipx installation path
                 const pipxPath = path.join(homeDir, ".local", "bin", "iloko");
                 if (fs.existsSync(pipxPath)) {
                     ilokoPath = pipxPath;
@@ -56,7 +62,6 @@ export function activate(context: vscode.ExtensionContext) {
             }
         }
 
-        // 4️⃣ If still not found
         if (!fs.existsSync(ilokoPath) && ilokoPath === "iloko") {
             const installOption = "Install Iloko CLI";
             const choice = await vscode.window.showErrorMessage(
@@ -72,7 +77,6 @@ export function activate(context: vscode.ExtensionContext) {
             return;
         }
 
-        // ✅ Run the command in a terminal
         const terminal = vscode.window.createTerminal("Iloko Runner");
         terminal.show();
         terminal.sendText(`"${ilokoPath}" "${filePath}"`);
