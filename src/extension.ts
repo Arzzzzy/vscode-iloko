@@ -5,6 +5,20 @@ import * as path from 'path';
 import * as fs from 'fs';
 
 export function activate(context: vscode.ExtensionContext) {
+    console.log('Iloko extension activated.');
+
+    // 🌟 Auto-apply Iloko icon theme if not already active
+    const config = vscode.workspace.getConfiguration('workbench');
+    const currentIconTheme = config.get('iconTheme');
+
+    if (currentIconTheme !== 'iloko-icons') {
+        config.update('iconTheme', 'iloko-icons', vscode.ConfigurationTarget.Global)
+            .then(() => {
+                vscode.window.showInformationMessage('✅ Iloko Icons theme activated automatically!');
+            });
+    }
+
+    // 🟦 Register "Run Iloko File" command
     const runIloko = vscode.commands.registerCommand('iloko.runFile', async () => {
         const editor = vscode.window.activeTextEditor;
         if (!editor) {
@@ -58,7 +72,7 @@ export function activate(context: vscode.ExtensionContext) {
             return;
         }
 
-        // ✅ Run the command in terminal
+        // ✅ Run the command in a terminal
         const terminal = vscode.window.createTerminal("Iloko Runner");
         terminal.show();
         terminal.sendText(`"${ilokoPath}" "${filePath}"`);
