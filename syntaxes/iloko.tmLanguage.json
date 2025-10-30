@@ -1,0 +1,25 @@
+{
+  "scopeName": "source.iloko",
+  "patterns": [
+    {
+      "match": "\\b(IKABIL|IPAKITA|NO|NO KET DI|NO KUMA|BAYAT|ALPAS)\\b",
+      "name": "keyword.control.iloko"
+    },
+    {
+      "match": "\\b(True|False)\\b",
+      "name": "constant.language.iloko"
+    },
+    {
+      "match": "\".*?\"",
+      "name": "string.quoted.double.iloko"
+    },
+    {
+      "match": "#.*$",
+      "name": "comment.line.iloko"
+    },
+    {
+      "match": "\\b[0-9]+\\b",
+      "name": "constant.numeric.iloko"
+    }
+  ]
+}
