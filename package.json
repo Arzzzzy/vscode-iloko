@@ -1,14 +1,14 @@
 {
   "name": "iloko",
-  "displayName": "Iloko Language Support",
+  "displayName": "Iloko Programming Language Support",
   "icon": "ilokoicon.png",
   "repository": {
     "type": "git",
     "url": "https://github.com/Arzzzzy/vscode-iloko.git"
   },
   "description": "VS Code support for the Iloko programming language (run .iloko files using iloko-cli or venv)",
-  "version": "0.0.4",
-  "publisher": "arzz",
+  "version": "0.0.7",
+  "publisher": "ChristianAndreiArzadon",
   "engines": {
     "vscode": "^1.105.0"
   },
@@ -21,14 +21,19 @@
   ],
   "main": "./out/extension.js",
   "contributes": {
-    "languages": [
-      {
-        "id": "iloko",
-        "aliases": ["Iloko", "iloko"],
-        "extensions": [".iloko"],
-        "configuration": "./language-configuration.json"
-      }
-    ],
+      "languages": [
+        {
+          "id": "iloko",
+          "aliases": ["Iloko", "iloko"],
+          "extensions": [".iloko"],
+          "configuration": "./language-configuration.json",
+
+          "icon": {
+            "light": "ilokolangicon.svg",
+            "dark": "ilokolangicon.svg"
+          }
+        }
+      ],
     "grammars": [
       {
         "language": "iloko",
