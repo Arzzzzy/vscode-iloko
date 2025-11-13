@@ -7,7 +7,7 @@
     "url": "https://github.com/Arzzzzy/vscode-iloko.git"
   },
   "description": "VS Code support for the Iloko programming language (run .iloko files using iloko-cli or venv)",
-  "version": "0.0.8",
+  "version": "0.0.10",
   "publisher": "ChristianAndreiArzadon",
   "engines": {
     "vscode": "^1.105.0"
@@ -44,7 +44,7 @@
     "commands": [
       {
         "command": "iloko.runFile",
-        "title": "Run Iloko File"
+        "title": "Run Iloko"
       }
     ],
     "menus": {
