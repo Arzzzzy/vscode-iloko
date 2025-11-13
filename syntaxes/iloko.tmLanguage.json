@@ -2,7 +2,7 @@
   "scopeName": "source.iloko",
   "patterns": [
     {
-      "match": "\\b(IKABIL|IPAKITA|NO|NO KET DI|NO KUMA|BAYAT|ALPAS)\\b",
+      "match": "\\b(IKABIL|IPAKITA|NO|NO KET DI|NO KUMA|BAYAT|NALPAS)\\b",
       "name": "keyword.control.iloko"
     },
     {
